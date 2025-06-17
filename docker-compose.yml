@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  backend: # Spring boot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: babit-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://babit-postgres:5432/babit
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_REDIS_HOST: babit-redis
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - demo-network
+
+  postgres:
+    image: postgres:15
+    container_name: babit-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: babit
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      TZ: UTC
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - demo-network
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: babit-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - demo-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  demo-network:
