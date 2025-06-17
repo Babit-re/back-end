@@ -1,0 +1,14 @@
+blank_issues_enabled: false  # "빈 이슈 만들기" 버튼을 비활성화함
+
+issue_templates:
+  - name: 🐛 버그 리포트
+    description: 버그 발생 시 이 템플릿을 사용해 주세요.
+    file: bug_report.md
+
+  - name: ✨ 기능 요청
+    description: 새로운 기능을 추가하거나 기존 기능(성능 포함)을 개선할 때 사용해주세요.
+    file: feature_request.md
+
+  - name: ♻️ 유지 보수 이슈
+    description: 코드 리팩토링, 스타일 수정, 문서 작업 등 기능/성능 개선을 목적으로 하지 않는 유지 보수 작업에 사용해주세요.
+    file: maintenance_issue.md
