@@ -8,6 +8,11 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
 
+  security:
+    user:
+      name: admin     # ⚠ 테스트용 계정, 배포 전 반드시 제거
+      password: 1234  # ⚠ 테스트용 비밀번호
+
 #    jpa:
 #      hibernate:
 #        ddl-auto: update
