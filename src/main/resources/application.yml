@@ -8,11 +8,12 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
 
-#    jpa:
-#      hibernate:
-#        ddl-auto: update
-#      show-sql: true
-#      properties:
-#        hibernate:
-#          format_sql: true
-#          dialect: org.hibernate.dialect.PostgreSQLDialect
+  jpa:
+    open-in-view: false # 트랜잭션 범위 밖에서 지연 로딩 방지 (실무에서는 false 권장)
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
