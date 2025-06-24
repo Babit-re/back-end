@@ -45,7 +45,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 	// JPA
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	// Database
 	runtimeOnly 'org.postgresql:postgresql'
@@ -59,6 +59,10 @@ dependencies {
 
 	// 이메일 인증
 	implementation 'org.springframework.boot:spring-boot-starter-mail'         // SMTP 메일 전송
+
+	// 입력값 검증
+	implementation 'org.hibernate.validator:hibernate-validator'
+
 }
 
 tasks.named('test') {
