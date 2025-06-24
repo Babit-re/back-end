@@ -1,0 +1,9 @@
+### Java template
+*.class
+
+### macOS template
+*.DS_Store
+
+### Gradle
+.gradle
+/build/
