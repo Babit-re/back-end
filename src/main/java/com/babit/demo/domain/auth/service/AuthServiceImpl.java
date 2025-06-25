@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
         // Refresh Token 검증
         jwtTokenProvider.validateToken(refreshToken);
 
-        // Access Token 에서 User num을 가져옴
+        // Access Token 에서 UserEmail을 가져옴
         Authentication authentication = jwtTokenProvider.getAuthentication(refreshToken);
 
         // Redis에서 저장된 Refresh Token 값을 가져옴
