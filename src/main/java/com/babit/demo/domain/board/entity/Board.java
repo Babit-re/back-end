@@ -1,5 +1,7 @@
 package com.babit.demo.domain.board.entity;
 
+import com.babit.demo.domain.user.entity.User;
+
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
