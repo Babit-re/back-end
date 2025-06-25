@@ -1,7 +1,5 @@
 package com.babit.demo.global.config;
 
-import com.babit.demo.domain.auth.jwt.JwtAccessDeniedHandler;
-import com.babit.demo.domain.auth.jwt.JwtAuthenticationEntryPoint;
 import com.babit.demo.domain.auth.jwt.JwtFilter;
 import com.babit.demo.domain.auth.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +24,6 @@ public class SecurityConfig {
     }
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
