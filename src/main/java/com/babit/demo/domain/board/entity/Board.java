@@ -17,7 +17,7 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //기본키를 자동으로 증가시킴 
-    private Integer id; // null 값이어도 오류가 발생하지 않기에 보통 Integer을 사용 
+    private Long id; // null 값이어도 오류가 발생하지 않기에 보통 Integer을 사용 
 
     @Column(nullable = false)
     private String title;
@@ -29,10 +29,10 @@ public class Board {
     private LocalDateTime createdAt;
 
     @Column(name = "like_cnt", nullable = false)
-    private Integer likeCnt = 0;
+    private Long likeCnt = 0;
 
     @Column(name = "view_cnt", nullable = false)
-    private Integer viewCnt = 0;
+    private Long viewCnt = 0;
 
     // 작성자 (user)
     @ManyToOne(fetch = FetchType.LAZY) //ManyToOne : Board -> User 다대일 관계 / LAZY : Board 조회 시 User도 함께 조회되는 게 아니라 board.getUser() 호출 시에 User를 DB에서 로딩함. 
