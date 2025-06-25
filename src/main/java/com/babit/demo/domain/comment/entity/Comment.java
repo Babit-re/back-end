@@ -1,13 +1,14 @@
 package com.babit.demo.domain.comment.entity;
 
+import com.babit.demo.domain.board.entity.Board;
+import com.babit.demo.domain.user.entity.User;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-
 
 @Entity
 @Table(name = "comments")
