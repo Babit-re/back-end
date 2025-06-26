@@ -16,15 +16,18 @@ public class StandardNutrient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nutrientName;
 
     private double minAmount;
 
     private double maxAmount;
 
+    @Column(nullable = false, length = 20)
     private String unit;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private GenderType gender;
 
 }

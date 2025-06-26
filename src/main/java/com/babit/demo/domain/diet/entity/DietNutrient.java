@@ -19,9 +19,12 @@ public class DietNutrient {
     @JoinColumn(name = "diet_id", nullable = false)
     private Diet diet;
 
+    @Column(nullable = false)
     private String nutrientName;
 
+    @Column(nullable = false)
     private double amount;
 
+    @Column(nullable = false, length = 20)
     private String unit;
 }
