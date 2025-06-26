@@ -4,6 +4,8 @@ import com.babit.demo.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,7 +21,9 @@ public class MileageHistory {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false,
+    foreignKey = @ForeignKey(name = "fk_mileage_histories_users"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @Column(name = "amount", nullable = false)
