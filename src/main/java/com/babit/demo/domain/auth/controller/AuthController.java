@@ -20,16 +20,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(
-            @Valid @RequestBody LoginRequestDto loginRequestDto,
-            BindingResult br) {
+            @Valid @RequestBody LoginRequestDto loginRequestDto) {
 
-        // 1. 입력값 검증
-        if (br.hasErrors()) {
-            String errorMessage = br.getAllErrors().get(0).getDefaultMessage();
-            throw new IllegalArgumentException(errorMessage); // 전역 핸들러에서 처리
-        }
-
-        // 2. 로그인 시도
+        //로그인 시도
         TokenDto tokenDto = authService.login(loginRequestDto);
         return ResponseEntity.ok(tokenDto);
     }
