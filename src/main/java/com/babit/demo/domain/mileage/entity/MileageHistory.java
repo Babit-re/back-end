@@ -2,11 +2,16 @@ package com.babit.demo.domain.mileage.entity;
 
 import com.babit.demo.domain.user.entity.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "mileage_histories")
+@NoArgsConstructor
+@AllArgsConstructor
 public class MileageHistory {
 
     @Id
