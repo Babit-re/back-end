@@ -2,6 +2,7 @@ package com.babit.demo.domain.auth.service;
 
 import com.babit.demo.domain.user.entity.User;
 import com.babit.demo.domain.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,9 +16,10 @@ import java.util.Set;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService { //Spring Security의 UserDetailsService 인터페이스 구현
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) {
