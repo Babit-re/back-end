@@ -5,8 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.jwt.JwtException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -41,7 +44,16 @@ public class GlobalExceptionHandler {
         return buildResponseEntity(ErrorCode.FORBIDDEN, "접근 권한이 없습니다.");
     }
 
-    // [6] 그 외 모든 예외 (필요하다면 컨트롤러 내에서 추가적인 에러처리도 가능)
+    // [6] 입력값 검증 실패 (@Valid 검증을 통과하지 못할 때 자동으로 발생)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
+        String errorMessage = ex.getBindingResult().getFieldErrors().stream()
+                .map(e -> e.getField() + ": " + e.getDefaultMessage())
+                .collect(Collectors.joining(", "));
+        return buildResponseEntity(ErrorCode.INVALID_INPUT_VALUE, errorMessage);
+    }
+
+    // [7] 그 외 모든 예외 (필요하다면 컨트롤러 내에서 추가적인 에러처리도 가능)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception ex) {
         return buildResponseEntity(ErrorCode.INTERNAL_SERVER_ERROR, ex.getMessage());
