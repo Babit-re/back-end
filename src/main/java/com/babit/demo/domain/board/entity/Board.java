@@ -31,10 +31,10 @@ public class Board {
     private LocalDateTime createdAt;
 
     @Column(name = "like_cnt", nullable = false)
-    private Long likeCnt = 0;
+    private Long likeCnt = 0L;
 
     @Column(name = "view_cnt", nullable = false)
-    private Long viewCnt = 0;
+    private Long viewCnt = 0L;
 
     // 작성자 (user)
     @ManyToOne(fetch = FetchType.LAZY) //ManyToOne : Board -> User 다대일 관계 / LAZY : Board 조회 시 User도 함께 조회되는 게 아니라 board.getUser() 호출 시에 User를 DB에서 로딩함. 
