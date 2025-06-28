@@ -37,4 +37,9 @@ public class RefreshTokenService { //Redis에 RefreshToken 저장/조회/삭제/
         return tokenToCheck.equals(savedToken);
     }
 
+    //블랙리스트 저장
+    public void addBlackList(String key, String accessToken, long expirationTime){
+        redisTemplate.opsForValue().set(key, accessToken, expirationTime, TimeUnit.MILLISECONDS);
+    }
+
 }
