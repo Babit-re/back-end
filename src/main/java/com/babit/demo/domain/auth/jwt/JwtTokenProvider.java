@@ -62,7 +62,7 @@ public class JwtTokenProvider {  //JwtTokenProvider는 토큰 생성/파싱/검�
                     setSigningKey(secretKey)
                     .parseClaimsJws(token)
                     .getBody().getSubject();
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userPrincipal);
+            CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(userPrincipal);
             return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
         }catch(ExpiredJwtException e){
             throw new AuthenticationException("만료된 토큰입니다.") {};
