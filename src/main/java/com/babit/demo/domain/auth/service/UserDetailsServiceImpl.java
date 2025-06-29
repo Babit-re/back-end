@@ -1,5 +1,6 @@
 package com.babit.demo.domain.auth.service;
 
+import com.babit.demo.domain.auth.jwt.CustomUserDetails;
 import com.babit.demo.domain.user.entity.User;
 import com.babit.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,8 @@ public class UserDetailsServiceImpl implements UserDetailsService { //Spring Sec
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER")); // ✅ 최소한의 권한 부여
-        return new org.springframework.security.core.userdetails.User(
+        return new CustomUserDetails(
+                user.getId(), // ← 이거 덕분에 getId() 가능
                 user.getEmail(),
                 user.getPassword(),
                 grantedAuthorities

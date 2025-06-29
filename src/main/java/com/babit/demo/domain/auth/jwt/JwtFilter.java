@@ -41,6 +41,7 @@ public class JwtFilter extends OncePerRequestFilter {
         try {
             if (token != null && jwtTokenProvider.validateToken(token)) {
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
+                //토큰을 확인하고, SecurityContextHolder에 Authentication 객체 저장 -> 컨트롤러에서 Authentication를 인자로 사용
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         } catch (RedisConnectionFailureException e) {
