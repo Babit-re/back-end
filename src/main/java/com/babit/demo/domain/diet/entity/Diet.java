@@ -53,4 +53,23 @@ public class Diet {
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DietNutrient> nutrients = new ArrayList<>();
 
+    // 업데이트를 위한 메서드
+    public void updateInfo(DietType type, LocalTime time, SatisfactionType satisfaction, String memo, double totalCalorie) {
+        this.type = type;
+        this.time = time;
+        this.satisfaction = satisfaction;
+        this.memo = memo;
+        this.totalCalorie = totalCalorie;
+    }
+
+    public void updateFoods(List<DietFood> foods) {
+        this.foods.clear();
+        this.foods.addAll(foods);
+    }
+
+    public void updateNutrients(List<DietNutrient> nutrients) {
+        this.nutrients.clear();
+        this.nutrients.addAll(nutrients);
+    }
+
 }
