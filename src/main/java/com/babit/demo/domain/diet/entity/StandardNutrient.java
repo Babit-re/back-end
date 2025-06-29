@@ -1,6 +1,6 @@
 package com.babit.demo.domain.diet.entity;
 
-import com.babit.demo.domain.diet.type.GenderType;
+import com.babit.demo.domain.user.type.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +28,6 @@ public class StandardNutrient {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private GenderType gender;
+    private Gender gender;
 
 }
