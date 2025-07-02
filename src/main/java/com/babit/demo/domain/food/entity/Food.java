@@ -14,7 +14,7 @@ public class Food {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //JPA에서 Integer 사용권장(Optional, 컬렉션 사용 가능, Null값 가능)
+    private Long id;
 
     @Column(nullable = false)
     private String name;
