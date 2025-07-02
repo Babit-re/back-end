@@ -18,8 +18,15 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:babit-redis}  # docker-compose에서 던진 환경변수 사용(환경 변수가 없으면 babit-redis를 기본값으로 사용)
+      port: 6379
+
   jwt:
-    secret: Babit-Secret-Key-202506   #JWT 토큰 서명을 위한 시크릿키
+    secret: Babit-Secret-Key-Should-be-at-least-32-bytes!-202506   #JWT 토큰 서명을 위한 시크릿키
     token:
       access-expiration-time: 3600000     #1hour
       refresh-expiration-time: 86400000   #24hours
+
+

@@ -2,9 +2,13 @@ package com.babit.demo.global.config;
 
 import com.babit.demo.domain.auth.jwt.JwtFilter;
 import com.babit.demo.domain.auth.jwt.JwtTokenProvider;
+import com.babit.demo.domain.auth.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,12 +22,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final UserDetailsServiceImpl userDetailsService;
+    private final JwtTokenProvider jwtTokenProvider;
+
     @Bean  //비밀번호 암호화용 Bean 등록
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -37,7 +42,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**"
+                                "/v3/api-docs/**", "/auth/login", "/auth/reissue"
                         ).permitAll()
                         .anyRequest().authenticated()
                 );
@@ -49,4 +54,17 @@ public class SecurityConfig {
         );
         return http.build();
     }
+
+    @Bean  //AuthenticationManager Bean 등록
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder builder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+
+        builder
+                .userDetailsService(userDetailsService) //UserDetailService를 사용하여 사용자 정보를 가져옴
+                .passwordEncoder(passwordEncoder());  //BCryptPasswordEncoder를 사용하여 비밀번호를 확인
+
+        return builder.build();
+    }
+
 }
