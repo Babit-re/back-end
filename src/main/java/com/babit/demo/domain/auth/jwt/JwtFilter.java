@@ -10,6 +10,7 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.JwtException;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -32,7 +33,11 @@ public class JwtFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
+        //1. 토큰 가져오기
         String token = jwtTokenProvider.resolveToken(request);
+        //2. 로그아웃 된 토큰인지 확인
+        if(StringUtils.hasText(token)) jwtTokenProvider.validateBlackListToken(token);
+        //3. 토큰 유효성 확인
         try {
             if (token != null && jwtTokenProvider.validateToken(token)) {
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
